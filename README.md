@@ -1,19 +1,38 @@
 # stackulator
 
-this is for the implementation of a simple RPN shell
+ a simple RPN shell with syntax flavored like forth
+this takes in an expression from the user delimited by spaces.
 
-this will take in an RPN expression from the user delimited by spaces.
-then the text is broken up into 2 stacks, 1 for data, and 1 for functions
-then the stacks are evaluated
+## Example:
 
-example:
+input
 
-input expression
+2 3 + 5 * .
 
-2 3 + 5 *
+output
 
-stack diagram
+25
 
-func: + *
-data: 2 3 5
+## Special Commands:
+
+exit  = quit program
+.     = print stack
+clear = empty stack
+drop  = pop stack top
+dup   = duplicate stack top
+swap  = switch top 2 stack entries
+
+## todo
+
+build out the calculation part not using eval(string)
+include the basic stack manipulation operators
+work on implementing a 2 stack system
+vector operations ie: [1,2] + [3,4] = [4,6]
+
+
+see also:
+http://wiki.laptop.org/go/Forth_stack_operators
+http://astro.pas.rochester.edu/Forth/forth-words.html
+http://galileo.phys.virginia.edu/classes/551.jvn.fall01/primer.htm
+https://www.math.ubc.ca/~cass/vc/rpn/ca.html
 
