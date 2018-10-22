@@ -9,31 +9,32 @@
 # Modules
 import sys
 
-# global stack
-stk = []
+# global stacks
+dstk = []
+rstk = []
 
 # lists of commands
-coms = ["exit",".","clear","drop","dup","swap"]
+coms = ["exit",".","clear",">r","r>","drop","dup","swap"]
 
 #----------------------------------------
 
 # shell loop
 def main(argv):
-    global stk
+    global dstk
     while True:
         txt1 = input("\n>> ")
         txt2 = txt1.split()
         for t in txt2:
             try:
                 x = float(t)
-                stk.insert(0,x)
+                dstk.insert(0,x)
             except:
                 run(t)
 
 #----------------------------------------
 
 def run(t):
-    global stk
+    global dstk
     if t in coms:
         cmds(t)
     else:
@@ -42,42 +43,52 @@ def run(t):
 #----------------------------------------
 
 def cmds(c):
-    global stk
+    global dstk, rstk
     if c == "exit":
         print("")
         sys.exit()
     elif c == ".":
         show()
     elif c == "clear":
-        stk = []
+        dstk = []
+    elif c == ">r":
+        if len(dstk) == 0:
+            print("Error: stack underflow")
+        d = dstk.pop(0)
+        rstk.insert(0,d)
+    elif c == "r>":
+        if len(rstk) == 0:
+            print("Error: stack underflow")
+        r = rstk.pop(0)
+        dstk.insert(0,r)
     elif c == "drop":
-        if len(stk) > 0:
-            stk.pop(0)
+        if len(dstk) > 0:
+            dstk.pop(0)
         else:
             print("ERROR: stack underflow")
     elif c == "dup":
-        if len(stk) > 0:
-            stk.insert(0,stk[0])
+        if len(dstk) > 0:
+            dstk.insert(0,dstk[0])
         else:
             print("ERROR: stack underflow")
     elif c == "swap":
-        if len(stk) >= 2:
-            a = stk.pop(0)
-            b = stk.pop(0)
-            stk.insert(0,a)
-            stk.insert(0,b)
+        if len(dstk) >= 2:
+            a = dstk.pop(0)
+            b = dstk.pop(0)
+            dstk.insert(0,a)
+            dstk.insert(0,b)
         else:
             print("ERROR: stack underflow")
 
 #----------------------------------------
 
 def calc(f):
-    global stk
-    if len(stk) >= 2:
-        b = stk.pop(0)
-        a = stk.pop(0)
+    global dstk
+    if len(dstk) >= 2:
+        b = dstk.pop(0)
+        a = dstk.pop(0)
         r = eval(str(a) + str(f) + str(b))
-        stk.insert(0,r)
+        dstk.insert(0,r)
     else:
         print("ERROR: stack underflow")
 
@@ -85,9 +96,10 @@ def calc(f):
 
 # stack print
 def show():
-    global stk
+    global dstk, rstk
     print("")
-    print("data: ",stk)
+    print("D: ",dstk)
+    print("R: ",rstk)
 
 #========================================
 #========================================

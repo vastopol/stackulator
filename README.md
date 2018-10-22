@@ -15,20 +15,20 @@ output
 
 ## Special Commands:
 
-exit  = quit program
-.     = print stack
-clear = empty stack
-drop  = pop stack top
-dup   = duplicate stack top
-swap  = switch top 2 stack entries
+* exit  = quit program
+* .     = print stacks
+* clear = empty stacks
+* >r    = Moves an entry from the data stack to the return stack
+* r>    = Moves an entry from the return stack to the data stack
+* drop  = pop data stack top
+* dup   = duplicate data stack top
+* swap  = switch top 2 data stack entries
 
 ## todo
 
 build out the calculation part not using eval(string)
-include the basic stack manipulation operators
-work on implementing a 2 stack system
+include more of the basic stack manipulation operators
 vector operations ie: [1,2] + [3,4] = [4,6]
-
 
 see also:
 http://wiki.laptop.org/go/Forth_stack_operators
